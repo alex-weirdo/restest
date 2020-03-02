@@ -25,7 +25,8 @@ class Route
 	}
 
 	public static function check ($route) {
-		$url = array_filter(explode('/', $_SERVER['REQUEST_URI']), function ($el) {
+		$url = explode('?', $_SERVER['REQUEST_URI'], 2)[0];
+		$url = array_filter(explode('/', $url), function ($el) {
 			return true;
 		});
 		$arr_route = array_filter(explode('/', $route), function ($el) {

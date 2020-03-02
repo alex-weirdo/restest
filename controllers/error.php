@@ -1,3 +1,4 @@
 <?php
 
-echo '{error}';
+header('Content-Type: application/json');
+echo json_encode(array('result' => 'error'));

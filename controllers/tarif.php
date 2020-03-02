@@ -29,7 +29,9 @@ class PUT_Tarif_Controller
 			$tarif_group_id['tarif_group_id'] != $tarif_exist['tarif_group_id']
 		) {echo json_encode($this); return;}
 
-		$q = 'update services set tarif_id='.(int)$tarif_id.' where ID='.(int)$service_id.' and user_id='.(int)$user_id;
+		$new_pay_day = date('Y-m-d', strtotime('today midnight') + (int)$tarif_exist['pay_period'] * 30 * 24 * 3600);
+
+		$q = 'update services set tarif_id='.(int)$tarif_id.', payday = "'.$new_pay_day.'" where ID='.(int)$service_id.' and user_id='.(int)$user_id;
 		$result = self::db()->query($q);
 
 		if ($result) {
